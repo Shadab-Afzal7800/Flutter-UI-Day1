@@ -45,7 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Text(
                   'Inspiration',
-                  style: TextStyle(color: Colors.black87, fontSize: 40),
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 20,
@@ -58,7 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: TextField(
                     decoration: InputDecoration(
                         border: InputBorder.none,
-                        prefixIcon: Icon(Icons.search),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: Colors.black87,
+                        ),
                         hintText: "Search you're looking for",
                         hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
                   ),
@@ -99,6 +105,43 @@ class _HomeScreenState extends State<HomeScreen> {
                       promoCard(
                           'assets/images/prateek-katyal-FcdtuGf7TEc-unsplash.jpg')
                     ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 150,
+                  decoration: BoxDecoration(
+                      color: Colors.orange,
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(
+                              'assets/images/cj-dayrit-xX2aYSBsyKo-unsplash.jpg'))),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: LinearGradient(
+                            begin: Alignment.bottomRight,
+                            stops: [
+                              0.1,
+                              0.9
+                            ],
+                            colors: [
+                              Colors.black.withOpacity(.8),
+                              Colors.black.withOpacity(.1)
+                            ])),
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(
+                          'Best Designs',
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                      ),
+                    ),
                   ),
                 )
               ],
