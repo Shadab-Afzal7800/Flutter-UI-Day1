@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 200,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
-                    children: [],
+                    children: [promoCard('')],
                   ),
                 )
               ],
@@ -96,4 +96,30 @@ class _HomeScreenState extends State<HomeScreen> {
       )),
     );
   }
+}
+
+Widget promoCard(image) {
+  return AspectRatio(
+    aspectRatio: 2 / 3,
+    child: Container(
+      decoration: BoxDecoration(
+          color: Colors.orange,
+          borderRadius: BorderRadius.circular(20),
+          image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage(
+                  'assets/images/cristofer-maximilian-NSKP7Gwa_I0-unsplash.jpg'))),
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            gradient: LinearGradient(begin: Alignment.bottomRight, stops: [
+              0.1,
+              0.9
+            ], colors: [
+              Colors.black.withOpacity(.8),
+              Colors.black.withOpacity(.1)
+            ])),
+      ),
+    ),
+  );
 }
