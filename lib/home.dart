@@ -86,7 +86,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 200,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
-                    children: [promoCard('')],
+                    children: [
+                      promoCard(
+                          'assets/images/cristofer-maximilian-NSKP7Gwa_I0-unsplash.jpg'),
+                      promoCard(
+                          'assets/images/eileen-pan-5d5DSRQ5dUc-unsplash.jpg'),
+                      promoCard(
+                          'assets/images/jon-tyson-QL0FAxaq2z0-unsplash.jpg'),
+                      promoCard(
+                          'assets/images/liam-nguyen-C99Ma2u-VgQ-unsplash.jpg'),
+                      promoCard('assets/images/nik-z1d-LP8sjuI-unsplash.jpg'),
+                      promoCard(
+                          'assets/images/prateek-katyal-FcdtuGf7TEc-unsplash.jpg')
+                    ],
                   ),
                 )
               ],
@@ -100,15 +112,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
 Widget promoCard(image) {
   return AspectRatio(
-    aspectRatio: 2 / 3,
+    aspectRatio: 2.62 / 3,
     child: Container(
+      margin: EdgeInsets.only(right: 15),
       decoration: BoxDecoration(
           color: Colors.orange,
           borderRadius: BorderRadius.circular(20),
-          image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage(
-                  'assets/images/cristofer-maximilian-NSKP7Gwa_I0-unsplash.jpg'))),
+          image: DecorationImage(fit: BoxFit.cover, image: AssetImage(image))),
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
