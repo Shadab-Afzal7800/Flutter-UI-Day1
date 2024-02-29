@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (context, index) {
                           final image = imagesRandom[index];
                           final imageUrl = image["picture"]["large"];
-                          return promoCard(imageUrl);
+                          return promoCard(context, imageUrl);
                         },
                       ),
                     ),
