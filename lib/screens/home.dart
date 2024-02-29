@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_ui_day1/components/promoCard.dart';
+import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,6 +12,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<dynamic> imagesRandom = [];
+  @override
+  void initState() {
+    fetchImage();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -89,30 +100,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Promo Today',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Promos Today',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          imagesRandom.length.toString(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
+                        )
+                      ],
                     ),
                     SizedBox(height: 15),
                     Container(
                       height: 200,
-                      child: ListView(
+                      child: ListView.builder(
+                        itemCount: imagesRandom.length,
                         scrollDirection: Axis.horizontal,
-                        children: [
-                          promoCard(
-                              'assets/images/cristofer-maximilian-NSKP7Gwa_I0-unsplash.jpg'),
-                          promoCard(
-                              'assets/images/eileen-pan-5d5DSRQ5dUc-unsplash.jpg'),
-                          promoCard(
-                              'assets/images/jon-tyson-QL0FAxaq2z0-unsplash.jpg'),
-                          promoCard(
-                              'assets/images/liam-nguyen-C99Ma2u-VgQ-unsplash.jpg'),
-                          promoCard(
-                              'assets/images/nik-z1d-LP8sjuI-unsplash.jpg'),
-                          promoCard(
-                              'assets/images/prateek-katyal-FcdtuGf7TEc-unsplash.jpg')
-                        ],
+                        itemBuilder: (context, index) {
+                          final image = imagesRandom[index];
+                          final imageUrl = image["picture"]["large"];
+                          return promoCard(imageUrl);
+                        },
                       ),
                     ),
                     SizedBox(
@@ -162,28 +175,15 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
 
-Widget promoCard(image) {
-  return AspectRatio(
-    aspectRatio: 2.62 / 3,
-    child: Container(
-      margin: EdgeInsets.only(right: 15),
-      decoration: BoxDecoration(
-          color: Colors.orange,
-          borderRadius: BorderRadius.circular(20),
-          image: DecorationImage(fit: BoxFit.cover, image: AssetImage(image))),
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            gradient: LinearGradient(begin: Alignment.bottomRight, stops: [
-              0.1,
-              0.9
-            ], colors: [
-              Colors.black.withOpacity(.8),
-              Colors.black.withOpacity(.1)
-            ])),
-      ),
-    ),
-  );
+  void fetchImage() async {
+    const url = 'https://randomuser.me/api/?results=1000';
+    final uri = Uri.parse(url);
+    final response = await http.get(uri);
+    final body = response.body;
+    final json = jsonDecode(body);
+    setState(() {
+      imagesRandom = json["results"];
+    });
+  }
 }
