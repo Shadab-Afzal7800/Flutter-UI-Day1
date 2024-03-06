@@ -10,6 +10,10 @@ class CardDetails extends StatefulWidget {
 class _CardDetailsState extends State<CardDetails> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+        backgroundColor: Colors.orange,
+        body: Center(
+          child: Text('Scaffold'),
+        ));
   }
 }
